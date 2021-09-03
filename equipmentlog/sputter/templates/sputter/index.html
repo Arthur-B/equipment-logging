@@ -1,0 +1,68 @@
+<h1>RF Sputtering</h1>
+
+<h2>Latest depositions</h2>
+
+{% if latest_depositions %}
+    <table>
+        <tr>
+            <th> Day </th>
+            <th> User </th>
+            <th> Material </th>
+            <th> Power (W) </th>
+            <th> Pressure (mTorr) </th>
+            <th> MFC flow (sccm) </th>
+            <th> Deposition time </th>
+            <th> Thickness (nm) </th>
+            <th> Comment </th>
+        </tr>
+        {% for dep in latest_depositions %}
+            <tr>
+                <td>{{ dep.day }}</td>
+                <td>{{ dep.user }}</td>
+                <td>{{ dep.material }}</td>
+                <td>{{ dep.power }}</td>
+                <td>{{ dep.pressure }}</td>
+                <td>{{ dep.mfc_flow }}</td>
+                <td>{{ dep.deposition_time }}</td>
+                <td>{{ dep.thickness }}</td>
+                <td>{{ dep.comment }}</td>
+            </tr>
+        {% endfor %}  
+    </table>
+
+{% else %}
+    <p>No recent depositions.</p>
+{% endif %}
+
+
+<h2>Prediction</h2>
+
+<h3>Prediction form</h3>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form_prediction.as_table }}
+    </table>
+    <input type="submit" name="predict" value="Make prediction">
+</form>
+
+<h3>Prediction result</h3>
+
+{% if plot_div %}
+    {% autoescape off %}
+        {{ plot_div }}
+    {% endautoescape %}
+{% else %}
+    <p>No prediction data.</p>
+{% endif %}
+
+<h2>Save the deposition</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <table>
+    {{ form_submission.as_table }}
+    </table>
+    <input type="submit" name="submit" value="Submit new deposition">
+</form>
