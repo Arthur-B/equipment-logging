@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Header from "./components/Header"
-import Home from "./components/Home"
+import MainTable from "./components/MainTable"
+import MainPlot from "./components/MainPlot";
 // import PlotComponent from "./components/PlotComponent";
 
 class App extends Component {
@@ -9,9 +10,9 @@ class App extends Component {
       <Fragment>
         <Header />
         <h2>Table</h2>
-        <Home />
+        <MainTable />
         <h2>Plot</h2>
-        
+        <MainPlot />
       </Fragment>
     );
   }

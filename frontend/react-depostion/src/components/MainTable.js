@@ -7,7 +7,7 @@ import DepositionList from "./DepositionList";
 import NewDepositionModal from "./NewDepositionModal";
 import ExportCsv from "./ExportCsv";
 
-class Home extends Component {
+class MainTable extends Component {
     state = {
         depositions: []
     };
@@ -30,7 +30,7 @@ class Home extends Component {
                 <Row>
                     <Col>
                     <DepositionList
-                        depositions={this.state.depositions}
+                        depositions={this.state.depositions.slice(-5)}
                         resetState={this.resetState}
                     />
                     </Col>
@@ -52,4 +52,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default MainTable

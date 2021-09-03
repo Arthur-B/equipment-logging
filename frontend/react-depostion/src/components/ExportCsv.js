@@ -4,8 +4,8 @@ import { CSVLink } from "react-csv";
 
 class ExportCsv extends Component {
     render() {
-        const depositions = this.props.depositions; // Only get the last 10 depositions
-        
+        const depositions = this.props.depositions;
+                
         const tableHeaders = [
             { label: "id", key: "id"},
             { label: "Day", key: "day" },

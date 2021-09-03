@@ -6,7 +6,7 @@ import ConfirmRemovalModal from "./ConfirmRemovalModal";
 
 class DepositionList extends Component {
     render() {
-        const depositions = this.props.depositions.slice(-5); // Only get the last 10 depositions
+        const depositions = this.props.depositions;
         return (
             <Table>
                 <thead>
