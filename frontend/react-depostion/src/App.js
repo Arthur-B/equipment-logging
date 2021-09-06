@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Header from "./components/Header"
-import MainTable from "./components/MainTable"
-import MainPlot from "./components/MainPlot";
-// import PlotComponent from "./components/PlotComponent";
+import MainTable from "./components/Deposition table/MainTable"
+import MainPlot from "./components/Plot/MainPlot";
 
 class App extends Component {
   render() {

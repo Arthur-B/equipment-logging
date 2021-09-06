@@ -1,7 +1,8 @@
 import { Component, Fragment } from "react";
-import { HorizontalGridLines, MarkSeries, VerticalGridLines, XAxis, XYPlot, YAxis } from "react-vis";
+import { HorizontalGridLines, LineSeries, MarkSeries, VerticalGridLines, XAxis, XYPlot, YAxis } from "react-vis";
+import regression from "regression";
 
-import '../../node_modules/react-vis/dist/style.css';
+import '../../../node_modules/react-vis/dist/style.css';
 
 function duration2seconds(durationStr) {
     if (durationStr !== null) {
@@ -14,7 +15,7 @@ function duration2seconds(durationStr) {
     }
 }
 
-function getData(depositions) {
+function data2xy(depositions) {
     var data = []
     
     depositions.map(function(item) {
@@ -26,12 +27,38 @@ function getData(depositions) {
     return data;
 }
 
+
+//input X and calculate Y using the formula found
+//this works with all types of regression
+function formula(coeff, x) {
+    var result = null;
+    for (var i = 0, j = coeff.length - 1; i < coeff.length; i++, j--) {
+      result += coeff[i] * Math.pow(x, j);
+    }
+    return result;
+  }
+  
+  //setting theoretical data array of [X][Y] using experimental X coordinates
+  //this works with all types of regression
+function setTheoryData(rawData) {
+    // var result = regression.linear(rawData);
+    const data = rawData.map(dict => [Number(dict.x), Number(dict.y)]);
+    var result = regression.linear(data);
+    var coeff = result.equation;    
+    var theoryData = [];
+    for (var i = 0; i < rawData.length; i++) {
+      theoryData[i] = [rawData[i][0], formula(coeff, rawData[i][0])];
+    }
+    return theoryData;
+  }
+
+
 class ThicknessPlot extends Component {
     render() {
 
-        const depositions = this.props.depositions;
-        const data = getData(depositions);
-
+        const data = data2xy(this.props.depositions);
+        const data2 = setTheoryData(data);
+        
         return (
             <Fragment>
                 <XYPlot 
@@ -57,7 +84,11 @@ class ThicknessPlot extends Component {
                     <MarkSeries
                         data={data}
                     />
+                    <LineSeries
+                        data={data2}
+                    />
                 </XYPlot>
+                {data2}
             </Fragment>
         );
     }

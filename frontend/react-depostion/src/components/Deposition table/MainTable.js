@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
 import axios from "axios";
 
-import { API_URL } from "../constants";
+import { API_URL } from "../../constants";
 import DepositionList from "./DepositionList";
 import NewDepositionModal from "./NewDepositionModal";
 import ExportCsv from "./ExportCsv";
