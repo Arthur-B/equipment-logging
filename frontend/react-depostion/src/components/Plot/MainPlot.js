@@ -1,4 +1,4 @@
-import { Component, Fragment } from "react";
+import { Component, Fragment, useState } from "react";
 
 import { Form, FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
@@ -9,14 +9,16 @@ import ThicknessPlot from "./ThicknessPlot";
 import DepRatePlot from "./DepRatePlot";
 
 class MainPlot extends Component {
-    
-    state = {
-        depositions: [],
-        depositions_plot: [],
-        material: "",
-        power: "",
-        pressure: ""
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            depositions: [],
+            depositions_plot: [],
+            material: "",
+            power: "",
+            pressure: ""
+        }
+    }
 
     filterDepositions = depositions => {
 
@@ -37,12 +39,15 @@ class MainPlot extends Component {
     };
 
     onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        this.setState({
+            [e.target.name]: e.target.value
+        });
     };
 
-
+    // Get all depositions from API and keep the ones with non zero thickness
     getDepositions = () => {
-        axios.get(API_URL).then(res => this.setState({ depositions: res.data}));
+        axios.get(API_URL)
+            .then(res => this.setState({ depositions: res.data.filter(dep => dep.thickness !== null)}));
      };
 
     resetState = () => {
@@ -54,15 +59,11 @@ class MainPlot extends Component {
     }
 
     render() {
-
-        this.resetState()
-        this.state.depositions_plot = this.state.depositions.filter(dep => dep.thickness !== null)
-        this.state.depositions_plot = this.state.depositions_plot.filter(this.filterDepositions)
-
-
         return (
             <Fragment>
-                <h3>Thickness VS Deposition time</h3>
+
+                <h3> Data selection</h3> 
+
                 <Form>
                     <FormGroup>
                         <Label for="material">Material</Label>
@@ -93,12 +94,17 @@ class MainPlot extends Component {
                     </FormGroup>
                 </Form>
 
+                <h3> Thickness VS deposition time </h3>
+                
                 <ThicknessPlot 
-                    depositions={this.state.depositions_plot}
+                    depositions={this.state.depositions.filter(this.filterDepositions)}
                     resetState={this.resetState}
                 />
+
+                <h3> Deposition rate </h3>
+
                 <DepRatePlot 
-                    depositions={this.state.depositions_plot}
+                    depositions={this.state.depositions.filter(this.filterDepositions)}
                     resetState={this.resetState}
                 />
             </Fragment>

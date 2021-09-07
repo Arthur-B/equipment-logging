@@ -88,7 +88,6 @@ class ThicknessPlot extends Component {
                         data={data2}
                     />
                 </XYPlot>
-                {data2}
             </Fragment>
         );
     }

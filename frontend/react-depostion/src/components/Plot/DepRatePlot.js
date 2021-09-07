@@ -21,7 +21,7 @@ function data2xy(depositions) {
     depositions.map(function(item) {
         data.push({
             "x": item.id,
-            "y": item.thickness / duration2seconds(item.deposition_time)
+            "y": item.thickness * 1E10 / duration2seconds(item.deposition_time)
         });
     });
     return data;
@@ -88,7 +88,6 @@ class DepRatePlot extends Component {
                         data={data2}
                     />
                 </XYPlot>
-                {data2}
             </Fragment>
         );
     }
