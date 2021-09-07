@@ -1,8 +1,6 @@
 import { Component, Fragment } from "react";
-import { HorizontalGridLines, LineSeries, MarkSeries, VerticalGridLines, XAxis, XYPlot, YAxis } from "react-vis";
-import regression from "regression";
+import {ScatterChart, Scatter, CartesianGrid, XAxis, YAxis, Tooltip} from 'recharts';
 
-import '../../../node_modules/react-vis/dist/style.css';
 
 function duration2seconds(durationStr) {
     if (durationStr !== null) {
@@ -15,79 +13,62 @@ function duration2seconds(durationStr) {
     }
 }
 
+
 function data2xy(depositions) {
     var data = []
     
     depositions.map(function(item) {
         data.push({
             "x": item.id,
-            "y": item.thickness * 1E10 / duration2seconds(item.deposition_time)
+            "y": item.thickness / duration2seconds(item.deposition_time)
         });
     });
     return data;
 }
 
 
-//input X and calculate Y using the formula found
-//this works with all types of regression
-function formula(coeff, x) {
-    var result = null;
-    for (var i = 0, j = coeff.length - 1; i < coeff.length; i++, j--) {
-      result += coeff[i] * Math.pow(x, j);
-    }
-    return result;
-  }
-  
-  //setting theoretical data array of [X][Y] using experimental X coordinates
-  //this works with all types of regression
-function setTheoryData(rawData) {
-    // var result = regression.linear(rawData);
-    const data = rawData.map(dict => [Number(dict.x), Number(dict.y)]);
-    var result = regression.linear(data);
-    var coeff = result.equation;    
-    var theoryData = [];
-    for (var i = 0; i < rawData.length; i++) {
-      theoryData[i] = [rawData[i][0], formula(coeff, rawData[i][0])];
-    }
-    return theoryData;
-  }
-
-
 class DepRatePlot extends Component {
     render() {
 
         const data = data2xy(this.props.depositions);
-        const data2 = setTheoryData(data);
         
         return (
             <Fragment>
-                <XYPlot 
-                height={400} 
-                width={800}
+                <ScatterChart
+                    width={600}
+                    height={300}
+                    margin={{
+                        top: 10,
+                        bottom: 30,
+                        left: 30,
+                        right: 10
+                    }}
+                    data={data}
                 >
-                    <VerticalGridLines />
-                    <HorizontalGridLines />
-                    <XAxis
-                        title="ID"
-                        position="middle"
-                        tickTotal={8}
-                        attr="x"
-                        attrAxis="y"
-                    />
-                    <YAxis
-                        title="Deposition rate (nm/s)"
-                        position="middle"
-                        tickTotal={8}
-                        attr="y"
-                        attrAxis="x"
-                    />
-                    <MarkSeries
-                        data={data}
-                    />
-                    <LineSeries
-                        data={data2}
-                    />
-                </XYPlot>
+                <CartesianGrid stroke="#ccc" />
+                <XAxis 
+                    dataKey="x"
+                    type='number'
+                    name="id"
+                    label={{
+                        value: "Deposition id",
+                        position: "bottom"
+                    }}
+                />
+                <YAxis 
+                    dataKey="y"
+                    type='number' 
+                    name="Deposition rate (nm/s)"
+                    label={{
+                        value: "Deposition rate (nm/s)",
+                        position: "left",
+                        textAnchor: "middle",
+                        angle: -90
+                    }}
+                />
+                <Tooltip />
+                <Scatter data={data}/>
+                </ScatterChart>
             </Fragment>
         );
     }
