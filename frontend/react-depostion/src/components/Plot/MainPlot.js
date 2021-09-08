@@ -1,6 +1,6 @@
-import { Component, Fragment, useState } from "react";
+import { Component, Fragment} from "react";
 
-import { Form, FormGroup, Input, Label } from "reactstrap";
+import { Form, FormGroup, Input, Label, Row, Col, Container } from "reactstrap";
 import axios from "axios";
 
 import { API_URL } from "../../constants";
@@ -61,52 +61,76 @@ class MainPlot extends Component {
     render() {
         return (
             <Fragment>
+                <Container>
+                    <Row>
+                        <Col>
+                            <h2> Plot </h2> 
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <h3> Data selection</h3> 
+                        </Col>
+                    </Row>
 
-                <h3> Data selection</h3> 
+                    <Form>
+                    <Row>
+                        <Col>
+                            <FormGroup>
+                                <Label for="material">Material</Label>
+                                <Input
+                                    type="text" 
+                                    name="material"
+                                    onChange={this.onChange}
+                                    value={this.defaultIfEmpty(this.state.material)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>    
+                            <FormGroup>
+                                <Label for="power">Power:</Label>
+                                <Input
+                                    type="number"
+                                    name="power"
+                                    onChange={this.onChange}
+                                    value={this.defaultIfEmpty(this.state.power)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col>  
+                            <FormGroup>
+                                <Label for="pressure">Pressure:</Label>
+                                <Input
+                                    type="number"
+                                    name="pressure"
+                                    onChange={this.onChange}
+                                    value={this.defaultIfEmpty(this.state.pressure)}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    </Form>
+                    <Row>
+                        <Col>
+                            <h3> Thickness VS deposition time </h3>
+                            
+                            <ThicknessPlot 
+                                depositions={this.state.depositions.filter(this.filterDepositions)}
+                                resetState={this.resetState}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <h3> Deposition rate </h3>
 
-                <Form>
-                    <FormGroup>
-                        <Label for="material">Material</Label>
-                        <Input
-                            type="text" 
-                            name="material"
-                            onChange={this.onChange}
-                            value={this.defaultIfEmpty(this.state.material)}
+                        <DepRatePlot 
+                            depositions={this.state.depositions.filter(this.filterDepositions)}
+                            resetState={this.resetState}
                         />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="power">Power:</Label>
-                        <Input
-                            type="number"
-                            name="power"
-                            onChange={this.onChange}
-                            value={this.defaultIfEmpty(this.state.power)}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="pressure">Pressure:</Label>
-                        <Input
-                            type="number"
-                            name="pressure"
-                            onChange={this.onChange}
-                            value={this.defaultIfEmpty(this.state.pressure)}
-                        />
-                    </FormGroup>
-                </Form>
-
-                <h3> Thickness VS deposition time </h3>
-                
-                <ThicknessPlot 
-                    depositions={this.state.depositions.filter(this.filterDepositions)}
-                    resetState={this.resetState}
-                />
-
-                <h3> Deposition rate </h3>
-
-                <DepRatePlot 
-                    depositions={this.state.depositions.filter(this.filterDepositions)}
-                    resetState={this.resetState}
-                />
+                        </Col>
+                    </Row>
+                </Container>
             </Fragment>
         );
     }

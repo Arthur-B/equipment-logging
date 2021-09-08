@@ -1,6 +1,6 @@
 import { Component, Fragment } from "react";
-import {ScatterChart, Scatter, CartesianGrid, XAxis, YAxis, Tooltip} from 'recharts';
-// import regression from "regression";
+import {ScatterChart, Scatter, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
+import regression from "regression";
 
 
 function duration2seconds(durationStr) {
@@ -60,41 +60,47 @@ class ThicknessPlot extends Component {
 
         return (
             <Fragment>
-                <ScatterChart
-                    width={600}
+                <ResponsiveContainer
+                    width="100%"
                     height={300}
-                    margin={{
-                        top: 10,
-                        bottom: 30,
-                        left: 30,
-                        right: 10
-                    }}
-                    data={data}
                 >
-                <CartesianGrid stroke="#ccc" />
-                <XAxis 
-                    dataKey="x"
-                    type='number'
-                    name="Deposition time (s)"
-                    label={{
-                        value: "Deposition time (s)",
-                        position: "bottom"
-                    }}
-                />
-                <YAxis 
-                    dataKey="y"
-                    type='number' 
-                    name="Deposition thickness (nm)"
-                    label={{
-                        value: "Deposition thickness (nm)",
-                        position: "left",
-                        textAnchor: "middle",
-                        angle: -90
-                    }}
-                />
-                <Tooltip />
-                <Scatter data={data}/>
-                </ScatterChart>
+                    <ScatterChart
+                        margin={{
+                            top: 10,
+                            bottom: 30,
+                            left: 30,
+                            right: 10
+                        }}
+                        data={data}
+                    >
+                    <CartesianGrid stroke="#ccc" />
+                    <XAxis 
+                        dataKey="x"
+                        type='number'
+                        name="Deposition time (s)"
+                        label={{
+                            value: "Deposition time (s)",
+                            position: "bottom"
+                        }}
+                    />
+                    <YAxis 
+                        dataKey="y"
+                        type='number' 
+                        name="Deposition thickness (nm)"
+                        label={{
+                            value: "Deposition thickness (nm)",
+                            position: "left",
+                            textAnchor: "middle",
+                            angle: -90
+                        }}
+                    />
+                    <Tooltip />
+                    <Scatter 
+                        data={data}
+                        fill="#004191"
+                    />
+                    </ScatterChart>
+                </ResponsiveContainer>
             </Fragment>
         );
     }

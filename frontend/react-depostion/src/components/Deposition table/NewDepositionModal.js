@@ -36,7 +36,7 @@ class NewDepositionModal extends Component {
 
         return (
             <Fragment>
-                {button}
+                {button}{' '}
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
 

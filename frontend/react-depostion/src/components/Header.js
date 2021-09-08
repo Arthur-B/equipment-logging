@@ -1,9 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { Container } from "reactstrap";
 
 class Header extends Component {
     render() {
         return(
-            <h1>APMD Deposition Log</h1>
+            <Fragment>
+                <Container>
+                    <h1> APMD Deposition Log </h1>
+                </Container>
+            </Fragment>
         );
     }
 }

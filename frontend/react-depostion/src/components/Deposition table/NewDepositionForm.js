@@ -166,7 +166,6 @@ class NewDepositionForm extends React.Component {
                 </FormGroup>
 
                 <Button>Send</Button>
-
             </Form>
         );
     }

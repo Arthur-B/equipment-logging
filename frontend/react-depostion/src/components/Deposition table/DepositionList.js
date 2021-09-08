@@ -44,13 +44,14 @@ class DepositionList extends Component {
                                 <td>{deposition.thickness}</td>
                                 <td>{deposition.comment}</td>
                                 
-                                <td align="center">
+                                <td align="left">
                                     <NewDepositionModal
                                         create={false}
                                         deposition={deposition}
                                         resetState={this.props.resetState}
                                     />
-                                    &nbsp;&nbsp;
+                                    {' '}
+                                    {/* &nbsp;&nbsp; */}
                                     <ConfirmRemovalModal
                                         id={deposition.id}
                                         resetState={this.props.resetState}

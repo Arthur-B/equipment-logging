@@ -4,15 +4,17 @@ import Header from "./components/Header"
 import MainTable from "./components/Deposition table/MainTable"
 import MainPlot from "./components/Plot/MainPlot";
 
+import './components/style.css';
+
 class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
-        <h2>Table</h2>
-        <MainTable />
-        <h2>Plot</h2>
-        <MainPlot />
+          <header>
+            <Header />
+          </header>
+          <MainTable />
+          <MainPlot />
       </Fragment>
     );
   }

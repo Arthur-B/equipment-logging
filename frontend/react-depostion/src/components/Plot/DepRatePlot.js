@@ -1,5 +1,5 @@
 import { Component, Fragment } from "react";
-import {ScatterChart, Scatter, CartesianGrid, XAxis, YAxis, Tooltip} from 'recharts';
+import {ScatterChart, Scatter, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
 
 
 function duration2seconds(durationStr) {
@@ -34,41 +34,47 @@ class DepRatePlot extends Component {
         
         return (
             <Fragment>
-                <ScatterChart
-                    width={600}
+                <ResponsiveContainer
+                    width="100%"
                     height={300}
-                    margin={{
-                        top: 10,
-                        bottom: 30,
-                        left: 30,
-                        right: 10
-                    }}
-                    data={data}
                 >
-                <CartesianGrid stroke="#ccc" />
-                <XAxis 
-                    dataKey="x"
-                    type='number'
-                    name="id"
-                    label={{
-                        value: "Deposition id",
-                        position: "bottom"
-                    }}
-                />
-                <YAxis 
-                    dataKey="y"
-                    type='number' 
-                    name="Deposition rate (nm/s)"
-                    label={{
-                        value: "Deposition rate (nm/s)",
-                        position: "left",
-                        textAnchor: "middle",
-                        angle: -90
-                    }}
-                />
-                <Tooltip />
-                <Scatter data={data}/>
-                </ScatterChart>
+                    <ScatterChart
+                        margin={{
+                            top: 10,
+                            bottom: 30,
+                            left: 30,
+                            right: 10
+                        }}
+                        data={data}
+                    >
+                    <CartesianGrid stroke="#ccc" />
+                    <XAxis 
+                        dataKey="x"
+                        type='number'
+                        name="id"
+                        label={{
+                            value: "Deposition id",
+                            position: "bottom"
+                        }}
+                    />
+                    <YAxis 
+                        dataKey="y"
+                        type='number' 
+                        name="Deposition rate (nm/s)"
+                        label={{
+                            value: "Deposition rate (nm/s)",
+                            position: "left",
+                            textAnchor: "middle",
+                            angle: -90
+                        }}
+                    />
+                    <Tooltip />
+                    <Scatter 
+                        data={data}
+                        fill="#004191"
+                    />
+                    </ScatterChart>
+                </ResponsiveContainer>
             </Fragment>
         );
     }

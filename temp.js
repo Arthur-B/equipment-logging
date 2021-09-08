@@ -42,7 +42,25 @@
 
 // console.log(data2);
 
-import regression from 'regression';
-const result = regression.linear([[0, 1], [32, 67], [12, 79]]);
-const gradient = result.equation[0];
-const yIntercept = result.equation[1];
+// import { regression } from 'regression';
+
+const data = [
+    {"x": 0, "y": 0},
+    {"x": 1, "y": 1.1},
+    {"x": 2, "y": 1.9}
+]
+
+const data2 = [
+    [0, 0],
+    [1, 1.1],
+    [2, 1.9]
+]
+
+// const data_regression = Object.values(data);
+const data_regression = data2
+
+// const result = regression.linear(Object.values(data));
+// const gradient = result.equation[0];
+// const yIntercept = result.equation[1];
+
+console.log(data_regression)
