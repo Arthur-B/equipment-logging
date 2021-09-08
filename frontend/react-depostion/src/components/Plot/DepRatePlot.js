@@ -47,7 +47,10 @@ class DepRatePlot extends Component {
                         }}
                         data={data}
                     >
-                    <CartesianGrid stroke="#ccc" />
+                    <CartesianGrid 
+                        stroke="#ccc"
+                        strokeDasharray="3 3"
+                    />
                     <XAxis 
                         dataKey="x"
                         type='number'
