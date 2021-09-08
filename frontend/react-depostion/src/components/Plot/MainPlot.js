@@ -8,6 +8,7 @@ import { API_URL } from "../../constants";
 import ThicknessPlot from "./ThicknessPlot";
 import DepRatePlot from "./DepRatePlot";
 
+
 class MainPlot extends Component {
     constructor(props) {
         super(props)
@@ -26,7 +27,6 @@ class MainPlot extends Component {
         const power = this.state.power;
         const pressure = this.state.pressure;
 
-        // Can include thickness filtering here too
         if (material && depositions.material !== material) return false;
         if (power && depositions.power !== Number(power)) return false;
         if (pressure && depositions.pressure !== Number(pressure)) return false;
@@ -113,34 +113,15 @@ class MainPlot extends Component {
                     <Row>
                         <Col>
                             <h3> Thickness VS deposition time </h3>
+                            </Col>
+                    </Row>
                             
-                            <ThicknessPlot 
-                                depositions={this.state.depositions.filter(this.filterDepositions)}
-                                resetState={this.resetState}
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Form>
-                            <FormGroup>
-                                <Label for="target_thickness">Target thickness (nm):</Label>
-                                <Input
-                                    type="number"
-                                    name="target_thickness"
-                                    // onChange={this.onChange}
-                                    // value={this.defaultIfEmpty(this.state.pressure)}
-                                />
-                            </FormGroup>
-                            </Form>
-                        </Col>
-                        <Col>
-                            The deposition time is ...
-                        </Col>
-                        <Col>
-                            Regression equation
-                        </Col>
-                    </Row>
+                    <ThicknessPlot 
+                        depositions={this.state.depositions.filter(this.filterDepositions)}
+                        resetState={this.resetState}
+                    />
+                    
+                    
                     <Row>
                         <Col>
                         <h3> Deposition rate </h3>
