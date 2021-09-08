@@ -57,10 +57,11 @@ const data2 = [
 ]
 
 // const data_regression = Object.values(data);
-const data_regression = data2
+const data_regression = data2.map(x => x[0])
+const x_min = Math.min.apply(Math, data2.map(x => x[0]))
 
 // const result = regression.linear(Object.values(data));
 // const gradient = result.equation[0];
 // const yIntercept = result.equation[1];
 
-console.log(data_regression)
+console.log(x_min)

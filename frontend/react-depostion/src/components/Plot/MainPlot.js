@@ -77,7 +77,7 @@ class MainPlot extends Component {
                     <Row>
                         <Col>
                             <FormGroup>
-                                <Label for="material">Material</Label>
+                                <Label for="material">Material:</Label>
                                 <Input
                                     type="text" 
                                     name="material"
@@ -88,7 +88,7 @@ class MainPlot extends Component {
                         </Col>
                         <Col>    
                             <FormGroup>
-                                <Label for="power">Power:</Label>
+                                <Label for="power">Power (W):</Label>
                                 <Input
                                     type="number"
                                     name="power"
@@ -99,7 +99,7 @@ class MainPlot extends Component {
                         </Col>
                         <Col>  
                             <FormGroup>
-                                <Label for="pressure">Pressure:</Label>
+                                <Label for="pressure">Pressure (mTorr):</Label>
                                 <Input
                                     type="number"
                                     name="pressure"
@@ -118,6 +118,27 @@ class MainPlot extends Component {
                                 depositions={this.state.depositions.filter(this.filterDepositions)}
                                 resetState={this.resetState}
                             />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Form>
+                            <FormGroup>
+                                <Label for="target_thickness">Target thickness (nm):</Label>
+                                <Input
+                                    type="number"
+                                    name="target_thickness"
+                                    // onChange={this.onChange}
+                                    // value={this.defaultIfEmpty(this.state.pressure)}
+                                />
+                            </FormGroup>
+                            </Form>
+                        </Col>
+                        <Col>
+                            The deposition time is ...
+                        </Col>
+                        <Col>
+                            Regression equation
                         </Col>
                     </Row>
                     <Row>
